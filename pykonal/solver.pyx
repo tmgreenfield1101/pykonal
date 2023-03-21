@@ -488,6 +488,10 @@ class PointSourceSolver(EikonalSolver):
             self._nphi = 64
         return (self._nphi)
 
+    @nphi.setter
+    def nphi(self, value):
+        self._nphi = value
+
     @property
     def nrho(self):
         """
@@ -511,6 +515,10 @@ class PointSourceSolver(EikonalSolver):
         if not hasattr(self, "_ntheta"):
             self._ntheta = 33
         return (self._ntheta)
+
+    @ntheta.setter
+    def ntheta(self, value):
+        self._ntheta = value
 
     @property
     def near_field(self):
@@ -579,6 +587,7 @@ class PointSourceSolver(EikonalSolver):
         for idx in np.argwhere(~np.isinf(self.tt.values)):
             idx = tuple(idx)
             self.unknown[idx] = False
+            self.known[idx] = True
             self.trial.push(*idx)
 
 
